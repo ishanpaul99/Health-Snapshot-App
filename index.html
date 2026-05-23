@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Health Snapshot — Calculate BMI, healthy weight range, and daily calorie needs.">
+  <title>Health Snapshot</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="health-snapshot-logo.png">
+</head>
+<body>
+  <!-- Sticky Navigation -->
+  <header class="navbar" id="navbar">
+    <div class="container navbar__inner">
+      <a href="#home" class="navbar__logo" aria-label="Health Snapshot — scroll to home">
+        <img class="navbar__logo-icon" src="health-snapshot-logo.png" alt="Health Snapshot Logo">
+        <span class="navbar__logo-text">Health Snapshot</span>
+      </a>
+      <button class="navbar__toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="navbar__nav" id="navMenu">
+        <a href="#home" class="navbar__link">Home</a>
+        <a href="#health-check" class="navbar__link">Health Check</a>
+        <a href="#about" class="navbar__link">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="hero__bg" aria-hidden="true"></div>
+      <div class="container hero__content">
+        <p class="hero__badge">🥭 Your daily wellness companion</p>
+        <h1 class="hero__title">Understand Your Health in Seconds</h1>
+        <p class="hero__subtitle">
+          Calculate your BMI, discover your ideal weight range, and estimate calories for maintenance, loss, or gain.
+        </p>
+        <a href="#health-check" class="btn btn--primary hero__cta">Start Health Check</a>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features section">
+      <div class="container">
+        <h2 class="section__title">What You Can Do</h2>
+        <p class="section__subtitle">Quick insights powered by standard health formulas</p>
+        <div class="features__grid">
+          <article class="feature-card">
+            <div class="feature-card__icon" aria-hidden="true">📊</div>
+            <h3 class="feature-card__title">BMI Analysis</h3>
+            <p class="feature-card__text">Instantly calculate your BMI and category.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-card__icon" aria-hidden="true">⚖️</div>
+            <h3 class="feature-card__title">Ideal Weight Range</h3>
+            <p class="feature-card__text">See the healthy weight range for your height.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-card__icon" aria-hidden="true">🔥</div>
+            <h3 class="feature-card__title">Calorie Guidance</h3>
+            <p class="feature-card__text">Estimate maintenance, weight loss, and weight gain calories.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Health Check Section -->
+    <section id="health-check" class="health-check section">
+      <div class="container">
+        <h2 class="section__title">Health Check</h2>
+        <p class="section__subtitle">Enter your details for a complete BMI and calorie snapshot</p>
+
+        <div class="dashboard-card">
+          <form id="healthForm" class="health-form" novalidate>
+            <!-- Personal Information -->
+            <fieldset class="form-group">
+              <legend class="form-group__legend">Personal Information</legend>
+              <div class="form-grid">
+                <div class="form-field">
+                  <label for="age">Age</label>
+                  <input type="number" id="age" name="age" min="1" max="120" placeholder="e.g. 28" required>
+                  <span class="form-error" id="ageError"></span>
+                </div>
+                <div class="form-field">
+                  <span class="form-label">Gender</span>
+                  <div class="radio-group">
+                    <label class="radio-label">
+                      <input type="radio" name="gender" value="male" required>
+                      <span>Male</span>
+                    </label>
+                    <label class="radio-label">
+                      <input type="radio" name="gender" value="female">
+                      <span>Female</span>
+                    </label>
+                  </div>
+                  <span class="form-error" id="genderError"></span>
+                </div>
+                <div class="form-field">
+                  <label for="height">Height (cm)</label>
+                  <input type="number" id="height" name="height" min="50" max="250" step="0.1" placeholder="e.g. 170" required>
+                  <span class="form-error" id="heightError"></span>
+                </div>
+                <div class="form-field">
+                  <label for="weight">Weight (kg)</label>
+                  <input type="number" id="weight" name="weight" min="20" max="300" step="0.1" placeholder="e.g. 70" required>
+                  <span class="form-error" id="weightError"></span>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- Activity Level -->
+            <fieldset class="form-group">
+              <legend class="form-group__legend">Activity Level</legend>
+              <div class="form-field form-field--full">
+                <label for="activity">Select your typical activity</label>
+                <select id="activity" name="activity" required>
+                  <option value="">Choose activity level…</option>
+                  <option value="sedentary">Sedentary</option>
+                  <option value="light">Lightly Active</option>
+                  <option value="moderate">Moderately Active</option>
+                  <option value="very">Very Active</option>
+                </select>
+                <span class="form-error" id="activityError"></span>
+              </div>
+            </fieldset>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn--primary" id="analyzeBtn">
+                <span>Analyze Health</span>
+              </button>
+              <button type="button" class="btn btn--secondary" id="resetBtn">Reset</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Results (visual centerpiece) -->
+        <div id="resultsWrapper" class="results-wrapper" hidden>
+          <div class="results-card results-card--main reveal">
+            <h3 class="results-card__title">Your Health Snapshot 🍋</h3>
+            <div class="results-grid">
+              <div class="result-item result-item--primary">
+                <span class="result-item__label">BMI</span>
+                <span class="result-item__value" data-counter="bmi">0</span>
+              </div>
+              <div class="result-item result-item--primary">
+                <span class="result-item__label">BMI Category</span>
+                <span class="result-item__value result-item__value--text" id="bmiCategoryResult">—</span>
+              </div>
+              <div class="result-item">
+                <span class="result-item__label">Healthy BMI Range</span>
+                <span class="result-item__value result-item__value--text">18.5 – 24.9</span>
+              </div>
+              <div class="result-item result-item--highlight">
+                <span class="result-item__label">Ideal Weight Range</span>
+                <span class="result-item__value result-item__value--text" id="idealWeightRange">—</span>
+              </div>
+              <div class="result-item" id="maintenanceItem">
+                <span class="result-item__label">Maintenance Calories</span>
+                <span class="result-item__value">
+                  <span data-counter="maintenance">0</span> <small>kcal/day</small>
+                </span>
+              </div>
+              <div class="result-item" id="weightLossItem">
+                <span class="result-item__label">Weight Loss Calories</span>
+                <span class="result-item__value">
+                  <span data-counter="weightLoss">0</span> <small>kcal/day</small>
+                </span>
+              </div>
+              <div class="result-item" id="weightGainItem">
+                <span class="result-item__label">Weight Gain Calories</span>
+                <span class="result-item__value">
+                  <span data-counter="weightGain">0</span> <small>kcal/day</small>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- BMI Status Card -->
+          <div id="statusCard" class="status-card reveal" role="status">
+            <div class="status-card__icon" id="statusIcon" aria-hidden="true">✓</div>
+            <p class="status-card__label">Your BMI Category</p>
+            <h4 class="status-card__category" id="statusCategory">Normal Weight</h4>
+            <p class="status-card__message" id="statusMessage"></p>
+          </div>
+
+          <!-- Personalized Advice -->
+          <div class="advice-card reveal">
+            <div class="advice-card__header">
+              <span class="advice-card__icon" aria-hidden="true">💡</span>
+              <h4 class="advice-card__title">Personalized Health Advice</h4>
+            </div>
+            <p class="advice-card__text" id="adviceText"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+      <div class="container">
+        <div class="about-card">
+          <h2 class="section__title">About Health Snapshot</h2>
+          <p class="about-card__text">
+            Health Snapshot is an educational health calculator that calculates BMI, estimates daily calorie
+            requirements for maintenance and weight goals, calculates healthy weight ranges for your height,
+            and provides educational health guidance based on standard formulas.
+          </p>
+          <p class="about-card__text about-card__disclaimer">
+            It is intended for informational purposes only and is not medical advice. Always consult a
+            qualified healthcare professional before making changes to your diet or exercise routine.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© <span id="year"></span> Health Snapshot · Made with 🍊 for wellness awareness</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
